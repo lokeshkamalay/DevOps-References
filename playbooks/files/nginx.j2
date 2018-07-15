@@ -1,0 +1,12 @@
+upstream test_site {
+{% for ip in groups.webservers %}
+    server {{ ip }};
+{% endfor %}
+}
+
+server {
+    listen 80;
+    location / {
+       proxy_pass http://test_site;
+    }
+}

@@ -1,0 +1,17 @@
+---
+- name: Read the content of the files when changed
+  hosts: all
+  become: true
+  tasks:
+    - name: Copy the file
+      copy: src=files/abc.txt dest=/tmp/abc.txt
+      register: output
+
+    - block:
+        - name: Read the contents in target
+          command: cat /tmp/abc.txt
+          register: output1
+   
+        - debug: 
+            msg: "{{ output1.stdout }}"
+      when: output.changed

@@ -1,0 +1,9 @@
+---
+- name: Installing httpd software
+  yum: name=httpd state=present
+  notify: restart httpd
+
+- name: Copy Index file
+  template: src=index.html.j2 dest=/var/www/html/index.html mode=0644
+  notify: restart httpd
+

@@ -1,0 +1,8 @@
+---
+- name: A Sample yml file to copy the file
+  hosts: all
+  become: true
+  tasks:
+    - name: Copy file
+      copy: src=files/abc.txt dest=/tmp/abc.txt mode=0644
+      

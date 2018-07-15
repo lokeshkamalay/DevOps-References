@@ -1,0 +1,11 @@
+---
+- import_playbook: 02_InstallingSoftware.yml
+
+- name: Template and Include example
+  hosts: all
+  become: true
+
+  tasks:
+    - name: template copying
+      template: src=files/sampletemplate.j2 dest=/var/www/html/index.html mode=0644
+ 

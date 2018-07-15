@@ -1,0 +1,6 @@
+---
+- name: Deploy a site
+  hosts: all
+  become: true
+  roles:
+    - httpd_role

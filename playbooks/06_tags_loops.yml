@@ -1,0 +1,22 @@
+---
+- name: Sample file tags and loops
+  hosts: all
+  become: true
+  tasks:
+    - name: Install httpd and nss-util
+      yum: name={{ item }} state=present
+      with_items:
+        - httpd
+        - nss-util
+      tags:
+        - httpd
+        - nss-util
+    - name: Install ntp service
+      yum: name=ntpd state=present
+      tags:
+        - ntpd
+    
+    - name: Start httpd service
+      service: name=httpd state=started
+      tags:
+        - httpd

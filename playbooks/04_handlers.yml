@@ -1,0 +1,17 @@
+---
+- name: Starting a service if package is installed
+  hosts: all
+  become: true
+  tasks:
+    - name: Install httpd service
+      yum: name=httpd state=present
+      notify: start httpd service
+    
+    - name: Copy Index file
+      copy: src=files/index.html dest=/var/www/html/index.html mode=0644
+      notify: start httpd service
+
+  handlers:
+    - name: start httpd service
+      service: name=httpd state=restarted
+

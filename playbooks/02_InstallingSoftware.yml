@@ -1,0 +1,10 @@
+---
+- name: Installing httpd softwares
+  hosts: all
+  become: true
+  tasks:
+    - name: Install httpd package
+      yum: name=httpd state=present
+    
+    - name: Start Service
+      service: name=httpd state=started
