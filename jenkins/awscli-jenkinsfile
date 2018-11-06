@@ -1,0 +1,13 @@
+node('agent){
+    stage('ec2'){
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'lokiawskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+            withEnv(["AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID","AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY",'AWS_DEFAULT_REGION=us-east-1']) {
+                sh 'printenv'
+                sh 'aws ec2 describe-instances'   
+            }
+        }
+    }
+}
+//withCredentials allow you to bind secrets to a variable
+//withEnv allows you to export the values as an environment variable
+//In order to make it work, you need to install EC2 Plugin, configure credentials using AWS creds option and then generate pipeline syntax.
