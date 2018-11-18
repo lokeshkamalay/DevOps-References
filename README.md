@@ -1,5 +1,5 @@
-# This repo is just created for the benefit of Mythri Consulting LLC employees only.
-## It contains few references related to DevOps discussions held in the month of May-18.
+# This repo is just created for the benefit of DevOps aspirants.
+## It contains few references related to DevOps discussions
 
 ### Slides
 [click here to download the slide](Mythri_DevOps.pdf)
