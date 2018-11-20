@@ -12,7 +12,7 @@ if ((check_if_file_exists == 0)); then
 fi
 
 #Condition type 2
-[ -e !abc.txt ] || echo "File exists."
+[ -e abc.txt ] || echo "File doesn't exist."
 
 echo -e "\nMoving curson to condition type 3\n"
 
