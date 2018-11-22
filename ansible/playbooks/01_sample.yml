@@ -21,5 +21,11 @@
       copy:
         content: 'Checking if content copy works'
         dest: ~/abc.txt
+    
+    - name: Backing Up the file
+      copy:
+        src: files/abc.txt
+        dest: ~/abc.txt
+        backup_file: yes
   
 
