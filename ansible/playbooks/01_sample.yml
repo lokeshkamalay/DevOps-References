@@ -26,6 +26,6 @@
       copy:
         src: files/abc.txt
         dest: ~/abc.txt
-        backup_file: yes
+        backup: yes
   
 
