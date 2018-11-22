@@ -3,6 +3,24 @@
   hosts: all
   become: true
   tasks:
-    - name: Copy file
+    - name: Copying the file
+      copy: 
+        src: xyz.txt
+        dest: ~/
+        
+    - name: Coping another file
       copy: src=files/abc.txt dest=/tmp/abc.txt mode=0644
       
+    - name: Copying the remote file on remote server
+      copy:
+        src: /tmp/abc.txt
+        dest: ~/abc.txt
+        remote_src: yes
+        mode: 0755
+        
+    - name: Updating the file
+      copy:
+        content: 'Checking if content copy works'
+        dest: ~/abc.txt
+  
+
