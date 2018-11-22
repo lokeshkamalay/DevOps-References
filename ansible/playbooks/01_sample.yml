@@ -4,7 +4,7 @@
   tasks:
     - name: Copying the file
       copy: 
-        src: xyz.txt
+        src: files/xyz.txt
         dest: ~/
         
     - name: Coping another file
