@@ -1,14 +1,13 @@
 ---
 #Dev: Lokesh Kamalay
-#Desc: To create or delete user in target
-#Usage: 
-
-#To create an user:
-#ansible-playbook user.yml --extra-vars "userid=123456 username=LokeshKamalay task=create"
+##Desc: To create or delete user in target
+##Usage: 
 #
-#To delete an user:
-#ansible-playbook -i user.yml --extra-vars "userid=123456 username=LokeshKamalay task=delete"
-
+##To create an user:
+##ansible-playbook user.yml --extra-vars "userid=123456 username=LokeshKamalay task=create"
+##
+##To delete an user:
+##ansible-playbook -i user.yml --extra-vars "userid=123456 username=LokeshKamalay task=delete"
 - name: Creates and/or Deletes Local User Account
   hosts: all
   become: True
@@ -16,9 +15,9 @@
 
   tasks:
     - name: Generating Hashpassword for {{userid}}
-      command: python -c 'import crypt; print crypt.crypt("{{ userid }}","Loki")' #Generating the password as the same user id.
+      command: python -c 'import crypt; print crypt.crypt("{{ userid }}","Loki")' #Generating the password as the same user id.  This works only if the userid is in number
       register: password
-      when: task | match("create")
+      when: task is match("create")
    
     - name: Creating user {{userid}}
       user:
@@ -27,7 +26,7 @@
          password: "{{ password.stdout }}"
          update_password: on_create
       register: useroutput
-      when: task | match("create")
+      when: task is match("create")
     
     - name: Enforcing password reset
       shell: chage -d 0 {{ userid }}
@@ -44,4 +43,4 @@
          state: absent
          remove: yes
          force: yes
-      when: task | match("delete")
+      when: task is match("delete")
