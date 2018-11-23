@@ -7,4 +7,5 @@ ansible -i hosts -a "whoami" -u ec2-user --sudo #become a root
 ansible -i hosts -a "whoami" -u ec2-user --sudo --sudo-user testuser #connecting as user ec2-user and switching to user `testuser` with the help of sudo
 
 #ad-hoc modules
-ansible -i hosts -m ping
+ansible -i hosts -m ping #checks if the target server is pingable.
+ansible localhost -m setup #Displays all the inbuilt variables 
