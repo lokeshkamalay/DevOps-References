@@ -1,0 +1,39 @@
+---
+- name: Advanced Yum
+  hosts: all
+  become: true
+  tasks:
+    - name: Ensure wget is not present
+      yum:
+        name: wget
+        state: absent
+
+    - name: Download the rpm from a rpm site
+      get_url:
+        url: http://mirror.centos.org/centos/7/os/x86_64/Packages/libibmad-1.3.13-1.el7.i686.rpm
+        dest: /tmp/wget.rpm
+        mode: 0755
+
+    - name: Install wget using the localfile
+      yum:
+        name: /tmp/wget.rpm
+        state: present
+
+    - name: Capture the current version
+      shell: "wget --version | head -1"
+      register: output_old
+
+    - debug:
+        msg: "{{ output_old.stdout }}"
+    
+    - name: Upgrade the wget
+      yum:
+        name: wget
+        state: latest
+    
+    - name: Capture the current version 
+      shell: "wget --version | head -1"
+      register: output_new
+
+    - debug:
+        msg: "{{ output_new.stdout }}"
