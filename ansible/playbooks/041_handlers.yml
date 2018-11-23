@@ -1,0 +1,17 @@
+---
+- name: Handlers
+  hosts: all
+  become: true
+  tasks:
+    - name: install httpd
+      yum: name=httpd state=present
+      notify: "restart httpd"
+
+  handlers:  
+    - name: Copying the index file
+      copy: src=index.html dest=/var/www/html/index.html
+      listen: "restart httpd"
+
+    - name: restart the service now
+      service: name=httpd state=restarted
+      listen: "restart httpd"
