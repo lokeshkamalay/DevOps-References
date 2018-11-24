@@ -1,0 +1,11 @@
+---
+- name: Sample Loops
+  hosts: all
+  tasks:
+    - name: Printing names
+      debug:
+        msg: "This is {{ item }}"
+      with_items:
+        - apple
+        - bat
+        - cat
