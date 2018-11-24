@@ -1,0 +1,15 @@
+---
+  2 - name: RHEL vs Ubuntu
+  3   hosts: all
+  4   become: true
+  5   tasks:
+  6     - name: Installing ntp for RHEL or CentOs
+  7       yum: name=ntp state=present
+  8       when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
+  9 
+ 10     - name: Installing ntp for Ubuntu
+ 11       apt: name=ntp state=present
+ 12       when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
+ 13 
+ 14     - name: Starting the Service
+ 15       service: name=ntpd state=started
