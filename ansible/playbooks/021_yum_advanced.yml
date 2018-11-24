@@ -1,39 +1,38 @@
 ---
-- name: Advanced Yum
+- name: Installing stable version of CloudFoundry Command Line Interface
   hosts: all
   become: true
   tasks:
-    - name: Ensure wget is not present
-      yum:
-        name: wget
-        state: absent
-
-    - name: Download the rpm from a rpm site
+    - name: Downloading the stable CloudFoundry CLI rpm
       get_url:
-        url: http://mirror.centos.org/centos/7/os/x86_64/Packages/libibmad-1.3.13-1.el7.i686.rpm
-        dest: /tmp/wget.rpm
+        url: http://widehat.opensuse.org/opensuse/distribution/leap/15.0/repo/oss/x86_64/cf-cli-6.34.1-lp150.1.3.x86_64.rpm
+        dest: /tmp/cf-cli.rpm
         mode: 0755
 
-    - name: Install wget using the localfile
+    - name: Installing the stable cf-cli
       yum:
-        name: /tmp/wget.rpm
+        name: /tmp/cf-cli.rpm
         state: present
 
-    - name: Capture the current version
-      shell: "wget --version | head -1"
+    - name: Read the version
+      shell: "cf --version"
       register: output_old
+   
+    - debug:
+        msg: "Current version of cf-cli is {{ output_old.stdout }}"
+
+    - name: Installing wget
+      yum: name=wget state=present
+
+    - name: Adding the yum repo file for cf-cli
+      shell: "wget -O /etc/yum.repos.d/cloudfoundry-cli.repo https://packages.cloudfoundry.org/fedora/cloudfoundry-cli.repo"
+    
+    - name: Installing the latest CloudFoundry CLI
+      yum: name=cf-cli state=latest
+
+    - name: Read the version
+      shell: "cf --version"
+      register: output_new            
 
     - debug:
-        msg: "{{ output_old.stdout }}"
-    
-    - name: Upgrade the wget
-      yum:
-        name: wget
-        state: latest
-    
-    - name: Capture the current version 
-      shell: "wget --version | head -1"
-      register: output_new
-
-    - debug:
-        msg: "{{ output_new.stdout }}"
+        msg: "Newer version of cf-cli is {{ output_new.stdout }}"
