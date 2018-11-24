@@ -1,0 +1,29 @@
+---
+#ansible-playbook vars.yaml
+#ansible-playbook vars.yaml -e extra_var=outisde
+
+- name: Variable Test
+  hosts: all
+  become: true
+  vars:
+    software: httpd
+    indexfile: index.html
+    indexfileloc: files 
+    extra_var: inside
+  tasks:
+    - name: Installing {{ software }}
+      yum: 
+        name: "{{ software }}" 
+        state: present
+
+    - name: Copying the index file
+      copy:
+        src: "{{ indexfileloc }}/{{ indexfile }}"
+        dest: /var/www/html/index.html
+    
+    - name: Restarting the Service
+      service: name="{{ software }}" state=restarted
+
+    - name: Printing Extra Variable
+      debug: 
+        msg: "This is the test for extra variable {{ extra_var }}"
