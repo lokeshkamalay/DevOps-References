@@ -15,6 +15,7 @@
     <p>
 
     ```
+    
     PLAY [Installing boto in Controller Machine] ***********************************
 
     TASK [Gathering Facts] *********************************************************
@@ -46,6 +47,7 @@
 
     PLAY RECAP *********************************************************************
     localhost                  : ok=8    changed=4    unreachable=0    failed=0
+    
     ```
 
     </p>
