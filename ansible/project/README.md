@@ -6,7 +6,7 @@
 
 ## Usage
 ### Pre-requisites
-- Copy the Ansible control machine's key into AWS.
+- Copy the Ansible control machine's public key into AWS.
 - Update inbound rules of Default Security Group in AWS by allowing traffic on port 80.
 - If not using default vpc, consider creating a public subnet and enable public IP assignment.
 
@@ -55,7 +55,8 @@
 </details>
 
 ---
-`ansible-playbook -i hosts configure-mysite.yml`
+`ansible-playbook -i hosts configure-mysite.yml` <br />
+(Note: In case you haven't used ansible public key, then pls add control machine's public key in all newly created machines without fail)
     <details><summary>Play Output</summary>
         <p>
     ```
