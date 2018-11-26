@@ -11,7 +11,7 @@
 
 ### Execution
 `ansible-playbook configure-infra.yml -e "SECRET=FWMNt********9jEz1"`
-    <details><summary>Output</summary>
+    <details><summary>Play Output</summary>
         <p>
 
     ```
@@ -53,5 +53,67 @@
 </details>
 
 `ansible-playbook -i hosts configure-mysite.yml`
+    <details><summary>Play Output</summary>
+        <p>
+    ```
+    PLAY [Configuring my website] **************************************************
+
+    TASK [Gathering Facts] *********************************************************
+    The authenticity of host '172.31.37.17 (172.31.37.17)' can't be established.
+    ECDSA key fingerprint is SHA256:mUkQQgGxzr4SvW7R9FKq3/akWYBD3O3paYQChXzkiWI.
+    ECDSA key fingerprint is MD5:b2:34:3d:94:c7:f5:d4:78:4d:63:7c:14:5e:10:50:17.
+    Are you sure you want to continue connecting (yes/no)? The authenticity of host '172.31.35.175 (172.31.35.175)' can't be established.
+    ECDSA key fingerprint is SHA256:6qkcUgqdt+0gEeZQ7dr3/aCUtWNdqKEvW3Y07bfY2cY.
+    ECDSA key fingerprint is MD5:74:29:26:b9:1e:8c:ac:cd:c9:f7:e7:58:8d:ec:f5:1c.
+    Are you sure you want to continue connecting (yes/no)? yes
+    ok: [172.31.37.17]
+    yes
+    ok: [172.31.35.175]
+
+    TASK [Installing httpd] ********************************************************
+    changed: [172.31.35.175]
+    changed: [172.31.37.17]
+
+    TASK [Copying mysite contents] *************************************************
+    changed: [172.31.37.17]
+    changed: [172.31.35.175]
+
+    TASK [Restarting the service] **************************************************
+    changed: [172.31.35.175]
+    changed: [172.31.37.17]
+
+    PLAY RECAP *********************************************************************
+    172.31.35.175              : ok=4    changed=3    unreachable=0    failed=0   
+    172.31.37.17               : ok=4    changed=3    unreachable=0    failed=0 
+    ```
+</p>
+</details>
+
+
 
 `ansible-playbook -i hosts configure-nginx.yml`
+    <details><summary>Play Output</summary>
+        <p>
+    ```
+    PLAY [Configuring Nginx load balancer] *****************************************
+
+    TASK [Gathering Facts] *********************************************************
+    The authenticity of host '172.31.35.126 (172.31.35.126)' can't be established.
+    ECDSA key fingerprint is SHA256:ztMD+4nBF+ny0cbGyYgcaqrraMaOmILfrNSBfDqr8Lc.
+    ECDSA key fingerprint is MD5:4b:e2:0d:8e:59:fc:87:55:9f:db:e4:94:f9:f3:6a:dd.
+    Are you sure you want to continue connecting (yes/no)? yes
+    ok: [172.31.35.126]
+
+    TASK [Creating the configuration file for our website mysite] ******************
+    changed: [172.31.35.126]
+
+    TASK [Disabling the Default site] **********************************************
+    changed: [172.31.35.126]
+
+    TASK [Restarting the nginx service] ********************************************
+    changed: [172.31.35.126]
+
+    PLAY RECAP *********************************************************************
+    172.31.35.126              : ok=4    changed=3    unreachable=0    failed=0   
+</p>
+</details>
