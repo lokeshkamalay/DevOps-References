@@ -11,6 +11,7 @@
 
 ### Execution
 `ansible-playbook configure-infra.yml -e "SECRET=FWMNt********9jEz1"`
+
   <details><summary>Output</summary>
     <p>
 
