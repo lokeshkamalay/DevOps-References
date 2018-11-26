@@ -2,15 +2,17 @@
 ## Description
 - This will launch two RHEL and an Ubuntu Machine.
 - Installs Httpd web server and Nginx as a loadbalancer
+(Note: This is developed for folks who are new to Ansible.  For end to end automation you may consider creating roles, using ec2.py and other modules.)  
 
 ## Usage
 ### Pre-requisites
 - Copy the Ansible control machine's key into AWS.
 - Update inbound rules of Default Security Group in AWS by allowing traffic on port 80.
-- If not using default vpc, consider creating a public subnet and enable public IP assignments.
+- If not using default vpc, consider creating a public subnet and enable public IP assignment.
 
 ### Execution
 `ansible-playbook configure-infra.yml -e "SECRET=FWMNt********9jEz1"`
+(Note: You need to update the variables and subnetid)
     <details><summary>Play Output</summary>
         <p>
 
