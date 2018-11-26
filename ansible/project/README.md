@@ -12,7 +12,7 @@
 ### Execution
 `ansible-playbook configure-infra.yml -e "SECRET=FWMNt********9jEz1"`
 
-  <details><summary>Output</summary>
+<details><summary>Output</summary>
     <p>
 
     ```
@@ -51,8 +51,8 @@
     
     ```
 
-    </p>
-    </details>
+      </p>
+</details>
 
 `ansible-playbook -i hosts configure-mysite.yml`
 
