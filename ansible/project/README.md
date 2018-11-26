@@ -1,7 +1,7 @@
 # Sample Ansible Project
 ## Description
 - This will launch two RHEL and an Ubuntu Machine.
-- Installs Httpd web server and Nginx as a loadbalancer
+- Installs Httpd web server and Nginx as a loadbalancer <br />
 (Note: This is developed for folks who are new to Ansible.  For end to end automation you may consider creating roles, using ec2.py and other modules.)  
 
 ## Usage
@@ -11,7 +11,7 @@
 - If not using default vpc, consider creating a public subnet and enable public IP assignment.
 
 ### Execution
-`ansible-playbook configure-infra.yml -e "SECRET=FWMNt********9jEz1"`
+`ansible-playbook configure-infra.yml -e "SECRET=FWMNt********9jEz1"` <br />
 (Note: You need to update the variables and subnetid)
     <details><summary>Play Output</summary>
         <p>
@@ -54,6 +54,7 @@
 </p>
 </details>
 
+---
 `ansible-playbook -i hosts configure-mysite.yml`
     <details><summary>Play Output</summary>
         <p>
@@ -92,7 +93,7 @@
 </details>
 
 
-
+---
 `ansible-playbook -i hosts configure-nginx.yml`
     <details><summary>Play Output</summary>
         <p>
