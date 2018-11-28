@@ -14,3 +14,7 @@
     - name: Printing my output variable
       debug:
         msg: "The file contain: {{ output.stdout }}"
+   
+    - name: Printing the Var variable data
+      debug:
+        var: output
