@@ -1,0 +1,20 @@
+---
+- name: Debugging sample
+  hosts: all
+  tasks:
+    - name: Creating the file
+      copy:
+        content: "This is a test message"
+        dest: ~/abc.txt
+
+    - name: Read the file
+      shell: "cat ~/abc.txt"
+      register: output
+ 
+    - name: Printing my output variable
+      debug:
+        msg: "The file contain: {{ output.stdout }}"
+   
+    - name: Printing the Var variable data
+      debug:
+        var: output

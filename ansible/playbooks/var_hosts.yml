@@ -1,0 +1,9 @@
+---
+#ansible-playbook var_hosts.yml -e hosts_group=all
+
+- name: Managing Hosts Group with variable
+  hosts: "{{ hosts_group }}"
+  become: true
+  tasks:
+    - name: Installing httpd
+      yum: name=httpd state=present

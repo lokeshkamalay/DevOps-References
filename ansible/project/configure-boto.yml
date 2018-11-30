@@ -1,0 +1,13 @@
+---
+- name: Installing boto in Controller Machine
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Installing pip
+      easy_install:
+        name: pip
+        state: latest
+
+    - name: Installing Boto
+      pip:
+        name: boto

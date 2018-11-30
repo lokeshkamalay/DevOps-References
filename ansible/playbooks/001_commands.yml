@@ -1,0 +1,11 @@
+#create hosts file
+#update ansible.cfg file
+#ad-hoc commands
+ansible -i hosts -a "echo hello" #running an ad-hoc command
+ansible -i hosts -a "whoami" -u ec2-user #be a specific user
+ansible -i hosts -a "whoami" -u ec2-user --sudo #become a root
+ansible -i hosts -a "whoami" -u ec2-user --sudo --sudo-user testuser #connecting as user ec2-user and switching to user `testuser` with the help of sudo
+
+#ad-hoc modules
+ansible -i hosts -m ping #checks if the target server is pingable.
+ansible localhost -m setup #Displays all the inbuilt variables 

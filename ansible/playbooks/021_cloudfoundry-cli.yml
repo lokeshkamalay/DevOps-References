@@ -1,0 +1,43 @@
+--- 
+#ansible-playbook cf.yml --skip-tags "upgrade"   Installs the stable version CloudFoundry cli
+#ansible-playbook cf.yml --tags "upgrade"   Upgrades the CF-Cli to the latest
+- name: cf-cli
+  hosts: all
+  become: true
+  tasks:
+    - name: Downloading the stable CloudFoundry CLI rpm
+      get_url:
+        url: http://widehat.opensuse.org/opensuse/distribution/leap/15.0/repo/oss/x86_64/cf-cli-6.34.1-lp150.1.3.x86_64.rpm
+        dest: /tmp/cf-cli.rpm
+        mode: 0755
+
+    - name: Installing the stable cf-cli
+      yum:
+        name: /tmp/cf-cli.rpm
+        state: present
+
+    - name: Read the version
+      shell: "cf --version"
+      register: output_old
+   
+    - debug:
+        msg: "Current version of cf-cli is {{ output_old.stdout }}"
+    
+    - block:
+      - name: Installing wget
+        yum: name=wget state=present
+
+      - name: Adding the yum repo file for cf-cli
+        shell: "wget -O /etc/yum.repos.d/cloudfoundry-cli.repo https://packages.cloudfoundry.org/fedora/cloudfoundry-cli.repo"
+    
+      - name: Installing the latest CloudFoundry CLI
+        yum: name=cf-cli state=latest
+
+      - name: Read the version
+        shell: "cf --version"
+        register: output_new            
+
+      - debug:
+          msg: "Newer version of cf-cli is {{ output_new.stdout }}"
+      tags:
+        - upgrade

@@ -1,0 +1,15 @@
+---
+- name: Configuring my website
+  hosts: webservers
+  become: true
+  tasks:
+    - name: Installing httpd 
+      yum: name=httpd state=present
+  
+    - name: Copying mysite contents
+      template:
+        src: files/mysite.conf.j2
+        dest: /var/www/html/index.html
+
+    - name: Restarting the service
+      service: name=httpd state=restarted

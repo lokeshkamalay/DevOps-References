@@ -1,0 +1,18 @@
+---
+#Debug var output provides the details to use under condition
+- name: Check if a particular file exists
+  hosts: all
+  tasks:
+    - name: Check if exists are not
+      stat:
+        path: ~/abc.txt
+      register: output
+    
+    - debug:
+        var: output
+    
+    - name: Create the file if missing
+      file:
+        path: ~/abc.txt
+        state: touch
+      when: output.stat.exists == False

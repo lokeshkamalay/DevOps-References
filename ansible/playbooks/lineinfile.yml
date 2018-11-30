@@ -1,0 +1,28 @@
+---
+- name: Example for lineinfile
+  hosts: all
+  become: true
+  tasks:
+    - name: Installing httpd
+      yum: name=httpd state=present
+    
+    - name: Stop the service
+      service: name=httpd state=stopped
+
+    - name: Copying the Index File
+      copy:
+        src: files/index.html
+        dest: /var/www/html/index.html
+    
+    - name: Changing the Default Port
+      lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '^Listen '
+        insertafter: '^#Listen '
+        line: 'Listen 8080'  
+    
+    - name: Start the service
+      service: name=httpd state=started
+
+    - debug:
+        msg: "Pls use 8080 port to access the website"
