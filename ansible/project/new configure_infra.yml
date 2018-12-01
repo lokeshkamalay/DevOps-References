@@ -1,0 +1,62 @@
+---
+- import_playbook: configure-boto.yml
+
+- name: Launching an EC2 machine
+  hosts: localhost
+  become: true
+  vars:
+    ACCESS: AKIAIFQX73GPZW3LIAIA
+    SECRET: mysecretkey
+    REGION: us-east-1
+    MYKEY: Masterkeys
+  tasks:
+    - name: Launching an EC2 Machine for Nginx Loadbalancer    
+      ec2:
+        aws_access_key: "{{ ACCESS }}"
+        aws_secret_key: "{{ SECRET }}"
+        aws_region: "{{ REGION }}"
+        key_name: "{{ MYKEY }}"
+        instance_type: t2.micro
+        user_data: |
+                   #!/bin/sh
+                   sudo apt-get install python -y
+        image: ami-0297c9d5c0c6e5b82
+        wait: yes
+        count: 1
+        instance_tags:
+          Name: nginx-loadbalancer
+        vpc_subnet_id: subnet-564cc50a
+        assign_public_ip: yes
+      register: output
+    
+    - name: Updating the Hosts file with Nginx Private IP
+      lineinfile:
+        path: hosts
+        regexp: "^[nginx]"
+        insertafter: "[nginx]"
+        line: "{{ item.private_ip }}"
+      with_items: "{{ output.instances }}"
+
+    - name: Launching Two EC2 machines for mysite website
+      ec2:
+        aws_access_key: "{{ ACCESS }}"
+        aws_secret_key: "{{ SECRET }}"
+        aws_region: "{{ REGION }}"
+        key_name: "{{ MYKEY }}"
+        instance_type: t2.micro
+        image: ami-053a4bc6c76c8da90
+        wait: yes
+        count: 2
+        instance_tags:
+          Name: mysite-webserver
+        vpc_subnet_id: subnet-564cc50a
+        assign_public_ip: yes
+      register: output
+
+    - name: Updating Hosts file with private IPs of webservers
+      lineinfile:
+        path: hosts
+        regexp: "^[webservers]"
+        insertafter: "[webservers]"
+        line: "{{ item.private_ip }}"
+      with_items: "{{ output.instances }}"
