@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: deployer
+  namespace: jenkins-project
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: deployer-cluster-role-biniding
+subjects:
+- kind: ServiceAccount
+  name: deployer
+  namespace: jenkins-project
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: ""
