@@ -51,7 +51,7 @@
 2. Under Pipeline Section --> Pipeline script from SCM
 3. Choose Git,
 4. Repository URL --> https://github.com/lokeshkamalay/java-tomcat-maven-example.git
-5. Script Path --> Jenkinsfile-k8s
+5. Script Path --> [Jenkinsfile-k8s](https://github.com/lokeshkamalay/java-tomcat-maven-example/blob/master/Jenkinsfile-k8s)
 
 ## Running the Job.
 1. Execute the job first and it may fail due to unapproval of a method to get artifacts method.
@@ -62,7 +62,7 @@
 1. It is going to pull two images, maven and java with docker client.
 2. Exposed docker socket into java with docker client image to work on docker
 3. Build stage generate the package under taget directory
-4. Preparing Image stage, prepares your new image.
+4. Preparing Image stage, prepares your new image using [Dockerfile](https://github.com/lokeshkamalay/java-tomcat-maven-example/blob/master/Dockerfile) and publishes it to registry.
 5. Deployment Stage, downloads kubectl, configures and updates the deployment that we created above by sq.yml file
 
 
