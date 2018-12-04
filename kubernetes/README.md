@@ -7,7 +7,7 @@
 - A Sample maven project
 
 ## Set up Minikube, VirtualBox and Kubectl
-`Sourced From: https://itnext.io/deploy-jenkins-with-dynamic-slaves-in-minikube-8aef5404e9c1`
+`Sourced From: https://itnext.io/deploy-jenkins-with-dynamic-slaves-in-minikube-8aef5404e9c1` <br/>
 `Pls follow the instructions provided at https://kubernetes.io/docs/tasks/tools/install-minikube/`
 1. Setup the minikube as said in above site
 2. Start the minikube (it may take a while)
