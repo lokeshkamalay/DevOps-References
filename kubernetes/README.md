@@ -7,15 +7,14 @@
 - A Sample maven project
 
 ## Set up Minikube, VirtualBox and Kubectl
-`Sourced From: https://itnext.io/deploy-jenkins-with-dynamic-slaves-in-minikube-8aef5404e9c1` <br/>
-`Pls follow the instructions provided at https://kubernetes.io/docs/tasks/tools/install-minikube/`
-1. Setup the minikube as said in above site
+`Sourced: https://itnext.io/deploy-jenkins-with-dynamic-slaves-in-minikube-8aef5404e9c1`
+1. Setup the [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
 2. Start the minikube (it may take a while)
     `minikube start --vm-driver=virtualbox`
 3. Check the status of the minikube and notedown the IP
     `minikube status`
 ## Install the helm
-1. Follow the instructions here to install the helm https://docs.helm.sh/using_helm/#installing-helm
+1. Follow the instructions here to install the [helm](https://docs.helm.sh/using_helm/#installing-helm)
 2. Initialize the helm, this will configure the tiller in kube-system namespace.
     `helm init --service-account default`
 
@@ -28,7 +27,7 @@
     `helm install --name jenkins -f helm-values.yaml stable/jenkins -n jenkins-project`
 4. Above command will also provides the commands to get the default password for admin account to access your Jenkins.
     `printf $(kubectl get secret --namespace jenkins-project jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo`
-5. Execute the following command to get the minikube IP address to access the jenkins `http://<ip>:32000/.  (Note: Change the port number in case you modifed the values for nodePort)
+5. Execute the following command to get the minikube IP address to access the jenkins `http://<ip>:32000/`<br/>  (Note: Change the port number in case you modifed the values for nodePort)
     `minikube ip`
 6. Login to Jenkins and install the plugin `pipeline utilities` in Jenkins. (you may update the helm-values.yml under install plugin section to avoid this step)
 
