@@ -35,6 +35,7 @@
 1. We would be using a dedicated service account to perform all the deployments in jenkins-project namespace. Run the command to create Service Account. <br/>
     `kubectl create -f deployer.yml`
 2. Generate the token of deployer account by running below command.  Copy the output. <br/>
+    `kubectl get secrets -n jenkins-project` <br/> select the deployer account secret name and replace in below command.<br/>
     `kubectl get secrets deployer-token-bvmx6 -o jsonpath='{.data.token}' -n jenkins-project | base64 --decode`
 3. Login to Jenkins to create credentials with kind Secret Text.
     - Created with the name of `deployer-token`
