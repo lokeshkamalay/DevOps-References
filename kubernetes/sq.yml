@@ -1,0 +1,59 @@
+# apiVersion: extensions/v1beta1
+# kind: Ingress
+# metadata:
+#   name: sq
+#   annotations:
+#     kubernetes.io/ingress.class: "nginx"
+# spec:
+#   rules:
+#   - host: sq.localhost.com
+#     http:
+#       paths:
+#       - path: /
+#         backend:
+#           serviceName: sq
+#           servicePort: 80
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: sq
+# spec:
+#   # type: LoadBalancer
+#   selector:
+#     app: sq
+#   ports:
+#   - name: http
+#     port: 80
+#     targetPort: 8080
+#     protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: sq
+spec: 
+  type: NodePort
+  selector: 
+    app: sq
+  ports: 
+  - name: http
+    nodePort: 30022
+    port: 8080
+    protocol: TCP
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sq
+spec:
+  template:
+    metadata:
+      labels:
+        app: sq
+    spec:
+      containers:
+        - name: tomcat
+          image: "lokeshkamalay/sq:docker"
+          ports:
+            - containerPort: 8080
