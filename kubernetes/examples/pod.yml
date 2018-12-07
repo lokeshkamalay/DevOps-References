@@ -24,10 +24,10 @@ spec:
     image: "httpd"
     ports:
       - containerPort: 80
-    volumeMounts:
-    - name: indexdata
-      mountPath: /usr/local/apache2/htdocs
-  volumes:
-  - name: indexdata
-    configMap:
-      name: demo-index
+  #   volumeMounts:
+  #   - name: indexdata
+  #     mountPath: /usr/local/apache2/htdocs
+  # volumes:
+  # - name: indexdata
+  #   configMap:
+  #     name: demo-index
