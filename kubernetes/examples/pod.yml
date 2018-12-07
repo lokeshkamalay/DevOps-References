@@ -21,7 +21,7 @@ metadata:
 spec:
   containers:
   - name: tomcat
-    image: "lokeshkamalay/k8s:loki"
+    image: "httpd"
     ports:
       - containerPort: 80
   #   volumeMounts:
