@@ -1,0 +1,47 @@
+# kubectl create configmap myindex --from-file=index.html
+apiVersion: v1
+kind: Service
+metadata: 
+  name: statefulsetsvc1
+spec: 
+  type: NodePort
+  selector: 
+    app: statefulsetpod1
+  ports: 
+  - name: http
+    nodePort: 30029
+    port: 80
+    protocol: TCP
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: statefulset
+spec:
+  selector:
+    matchLabels:
+      app: statefulsetpod1 # has to match .spec.template.metadata.labels
+  serviceName: "statefulsetsvc1"
+  replicas: 3 # by default is 1
+  template:
+    metadata:
+      labels:
+        app: statefulsetpod1 # has to match .spec.selector.matchLabels
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: nginx
+        image: k8s.gcr.io/nginx-slim:0.8
+        ports:
+        - containerPort: 80
+          name: web
+        volumeMounts:
+        - name: www
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: www
+        configMap:
+          name: myindex
+#kubectl scale statefulset statefulset --replicas=4
