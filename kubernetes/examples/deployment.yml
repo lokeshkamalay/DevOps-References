@@ -48,3 +48,4 @@ spec:
     nodePort: 30023
     port: 80
     protocol: TCP
+#kubectl scale deployments mysite --replicas=4
