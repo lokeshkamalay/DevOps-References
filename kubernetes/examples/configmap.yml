@@ -18,3 +18,18 @@ spec:
   - name: indexdata
     configMap:
       name: myindex
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: mycfgmapsvc
+spec: 
+  type: NodePort
+  selector: 
+    app: mycfgmappod
+  ports: 
+  - name: http
+    nodePort: 30025
+    port: 80
+    protocol: TCP
+  
