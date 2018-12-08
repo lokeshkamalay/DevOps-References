@@ -1,4 +1,4 @@
-#kubectl create configmap myindex --from-file=index.html
+#kubectl create configmap myindex --from-file=index-avenger.html
 apiVersion: v1
 kind: Pod
 metadata:
