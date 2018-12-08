@@ -16,6 +16,7 @@ kind: Deployment
 metadata:
   name: mysite
 spec:
+  replicas: 2
   template:
     metadata:
       labels:
