@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pvcpod
+  labels:
+    app: pvcpod
+  #namespace: default 
+spec:
+  restartPolicy: Never
+  containers:
+  - name: pvccontainer
+    image: "httpd"
+    volumeMounts:
+    - name: pvcvol
+      mountPath: /usr/local/apache2/htdocs
+  volumes:
+  - name: pvcvol
+    hostPath:
+      path: /Users/lokeshkamalay/myindex #modify the path that you want to attach    
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: volumesvc
+spec:
+  type: NodePort
+  selector:
+    app: pvcpod
+  ports:
+  - name: http
+    nodePort: 30026
+    port: 80
+    protocol: TCP
