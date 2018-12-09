@@ -2,7 +2,7 @@
 ## It contains few references related to DevOps discussions
 
 ### Slides
-[click here to download the slide](Mythri_DevOps.pdf)
+[click here to download the slide](slides.pdf)
 ### Ansible
 [click here to see Ansible References](ansible)
 
