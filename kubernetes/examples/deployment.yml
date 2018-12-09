@@ -49,3 +49,10 @@ spec:
     port: 80
     protocol: TCP
 #kubectl scale deployments mysite --replicas=4
+#kubectl set image deployments mysite tomcat=nginx --record
+#kubectl rollout status deployments mysite
+#kubectl rollout history deployment mysite
+#kubectl get replicasets (rs)
+#kubectl rollout undo deployment mysite
+#kubectl rollout history deployment mysite --revision=3
+#kubectl autoscale deployments mysite  --min=5 --max=15 --cpu-percent=8
