@@ -9,3 +9,8 @@
 ### Jenkins
 [click here to see Jenkins References](jenkins)
 
+### Kubernetes
+[click here to see Kubernetes References](kubernetes)
+
+### Bash
+[click here to see Bash References](bash)
