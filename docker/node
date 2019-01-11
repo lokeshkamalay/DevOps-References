@@ -1,0 +1,33 @@
+FROM node:latest
+LABEL owner=lokeshkamalay
+LABEL node="11.6"
+LABEL npm="6.5.0"
+LABEL angularcli="7.2.1"
+LABEL maven="3.6.0"
+LABEL openjdk="8"
+
+#Installing Latest Angular CLI
+RUN npm install -g @angular/cli
+
+#Installing Openjdk8
+RUN echo deb http://http.debian.net/debian jessie-backports main >> /etc/apt/sources.list && \
+    apt-get clean && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+                openjdk-8-jdk \
+                ca-certificates-java
+ENV JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+
+#Installing Latest Maven
+RUN curl http://apache.mirrors.lucidnetworks.net/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz -o apache.tar.gz && \
+    mkdir -p /usr/share/maven && \
+    chmod -R 0755 /usr/share/maven && \
+    tar -zxf apache.tar.gz -C /usr/share/maven --strip-components=1 && \
+    ln -s /usr/share/maven/bin/mvn /usr/bin/mvn && \
+    rm -rf apache.tar.gz
+
+#Creating the jenkins user Account
+RUN groupadd -g 2000 jenkins && \
+    useradd -u 2000 -g jenkins -d /home/jenkins jenkins && \
+    mkdir /home/jenkins && \
+    chown -R jenkins:jenkins /home/jenkins
