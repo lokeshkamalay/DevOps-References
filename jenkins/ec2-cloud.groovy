@@ -14,6 +14,10 @@ node('ec2cloud-maven'){
         '''
     }
     stage('Copy to S3'){
-        sh "aws s3 cp target/*.jar s3://lokeshkamalay/"
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-ec2-batch2-creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+            sh "aws s3 cp target/*.jar s3://lokeshkamalay/"
+        }
     }
 }
+
+
