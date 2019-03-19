@@ -13,9 +13,9 @@ node('ec2cloud-maven'){
         aws --version
         '''
     }
-    
-    input message: 'Do Want To Deploy?', ok: 'Deploy'
-
+    timeout(time: 5, unit: 'SECONDS'){
+        input message: 'Do Want To Deploy?', ok: 'Deploy'
+    }
     stage('Copy to S3'){
         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-ec2-batch2-creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
             sh '''
