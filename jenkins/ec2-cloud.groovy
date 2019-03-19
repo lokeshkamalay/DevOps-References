@@ -17,15 +17,19 @@ node('ec2cloud-maven'){
         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-ec2-batch2-creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
             sh '''
                 aws s3 cp target/*.jar s3://lokeshkamalay/
+                
                 if [[ $? -eq 0 ]]; then
                     echo "The file is copied successfully" > result.txt
-                else:
+                else
                     echo "The file is failed to copy" > result.txt
+                fi
             '''
         }
     }
     stage('Email'){
-        sh 'sendmail lokesh.mydilse@gmail.com < result.txt'
+        sh '''
+            mutt -s "Jenkins Job Status" lokesh.mydilse@gmail.com < result.txt
+        '''
     }
 }
 
