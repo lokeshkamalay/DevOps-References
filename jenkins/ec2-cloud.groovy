@@ -18,6 +18,9 @@ node('ec2cloud-maven'){
             sh "aws s3 cp target/*.jar s3://lokeshkamalay/"
         }
     }
+    stage('Email'){
+        sh 'mail -s "The Jar file is copied" lokesh.mydilse@gmail.com < /dev/null'
+    }
 }
 
 
