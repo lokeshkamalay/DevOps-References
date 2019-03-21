@@ -1,29 +1,3 @@
-aws ec2 run-instances --image-id ami-0eb25cc5c27879e8d --count 1 --instance-type t2.micro --key-name AwsKamalayKey --security-group-ids sg-0b001586ce6527dcb --subnet-id subnet-3a885f66
-
-aws ec2 create-tags --resources i-0a0732a956df30f45 --tags Key=Name,Value=FromCLI
-
-
-AKIAIP4SQ5VWL6GUJ7NA
-qqQ/VcJPAqxaOvIFIwzuDbftzMDgx/zFUBn+t7vB
-
-
-project
-source
-target
-rundate
-status
-environment
-log
-
-AKIAJG23JU5FORBQCDXQ
-JADpc/U99hVR0c0XqhKuqA3MtRjb6xCNwCSnisuc
-
-1401 S MacArthur Blvd, Irving, TX 75060
-
-
-CRUMB=$(curl -s 'http://a966411:da8189f8244f92ee2d8411ce1cc9dcd4@esappd357.qcorpaa.aa.com:8080/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)')
-
-
 1. Create a launch configuration template and spin up a machine by using the template.
 2. Create a VPC with 4 subnets (2 in public, 2 in private), Create and update the Routes, Create IGW and assign it to Public Subnets, Create a NAT GW and assign it to Private Subnets.  Install GIT in a machine that is in Private subnet.
 3. Implement connectivity between two VPCs.
