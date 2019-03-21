@@ -1,3 +1,29 @@
+aws ec2 run-instances --image-id ami-0eb25cc5c27879e8d --count 1 --instance-type t2.micro --key-name AwsKamalayKey --security-group-ids sg-0b001586ce6527dcb --subnet-id subnet-3a885f66
+
+aws ec2 create-tags --resources i-0a0732a956df30f45 --tags Key=Name,Value=FromCLI
+
+
+AKIAIP4SQ5VWL6GUJ7NA
+qqQ/VcJPAqxaOvIFIwzuDbftzMDgx/zFUBn+t7vB
+
+
+project
+source
+target
+rundate
+status
+environment
+log
+
+AKIAJG23JU5FORBQCDXQ
+JADpc/U99hVR0c0XqhKuqA3MtRjb6xCNwCSnisuc
+
+1401 S MacArthur Blvd, Irving, TX 75060
+
+
+CRUMB=$(curl -s 'http://a966411:da8189f8244f92ee2d8411ce1cc9dcd4@esappd357.qcorpaa.aa.com:8080/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)')
+
+
 1. Create a launch configuration template and spin up a machine by using the template.
 2. Create a VPC with 4 subnets (2 in public, 2 in private), Create and update the Routes, Create IGW and assign it to Public Subnets, Create a NAT GW and assign it to Private Subnets.  Install GIT in a machine that is in Private subnet.
 3. Implement connectivity between two VPCs.
@@ -19,3 +45,13 @@
 19. I want users from Finanace group should access Finance object only in my S3.
 20. Setup a static website using S3.
 21. I want my files in S3 to move to Glacier after 30 days.
+22. Configure EC2 Cloud with Jenkins and run a job in one of the cloud agent.
+23. Copy a file in S3 from Jenkins using awscli
+24. Mount an additional 2 GB EBS volume to a machine and ensure it gets attached after reboot too.
+25. Unmount above attached volume and mount it to another machine without loosing the data.
+26. Create a NFS file system and attach it permanentely to two machines.
+27. Create topics in SNS and subscribe an email to it
+28. Configure CPU Utilization Alarm and perform a stress test to prove it works
+29. Create a Dashboard to show all running EC2 machines CPU Usage in one place
+30. Create an Event rule to trigger an email if an EC2 machine goes down
+31. Configure one RHEL and AWS Linux machine to send systemlogs to CloudWatch.  Install httpd in both machines and observe the logs in CloudWatch
