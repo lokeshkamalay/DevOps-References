@@ -1,0 +1,15 @@
+---
+- name: custom software instllation
+  hosts: db
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Adding a task
+      include_vars: variables.yml
+    - name: "installing {{ software }}"
+      yum:
+        name: "{{ software }}"
+        state: present
+    - name: "Name {{ name }} is coming from variables.yml file"
+      command: echo hi
