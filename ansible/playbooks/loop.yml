@@ -1,0 +1,13 @@
+---
+- name: Loop example
+  hosts: db
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Installing httpd and ntpd
+      yum:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - httpd
+        - ntp
