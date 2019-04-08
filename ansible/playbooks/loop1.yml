@@ -1,0 +1,21 @@
+---
+- name: Testing loop for variables
+  hosts: db
+  tasks:
+        - name: print
+          command: "echo {{ item }}"
+          register: output
+          loop:
+            - hi
+            - hello
+        - debug:
+            var: output
+        - debug:
+            var: output.results[0].stdout
+        - debug:
+            var: output.results[1].stdout
+        - debug:
+            var: "output.results[{{ item }}].stdout"
+          loop:
+            - 0
+            - 1
