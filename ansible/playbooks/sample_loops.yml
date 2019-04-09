@@ -5,7 +5,7 @@
     - name: Printing names
       debug:
         msg: "This is {{ item }}"
-      with_items:
+      with_items:  #you may better use loop here
         - apple
         - bat
         - cat
