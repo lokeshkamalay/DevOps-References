@@ -1,0 +1,20 @@
+#make sure you create the index.html.j2 in templates directory before using it.
+---
+- name: Template example
+  hosts: web
+  become: true
+  tasks:
+    - name: installing httpd
+      yum:
+        name: httpd
+        state: present
+
+    - name: Copying the httpd file
+      template:
+        src: ../templates/index.html.j2
+        dest: /var/www/html/index.html
+
+    - name: Restart the service
+      service:
+        name: httpd
+        state: restarted
