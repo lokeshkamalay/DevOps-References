@@ -9,8 +9,8 @@
 * [`docker kill`](https://docs.docker.com/engine/reference/commandline/kill) sends a SIGKILL to a running container.
 * [`docker attach`](https://docs.docker.com/engine/reference/commandline/attach) will connect to a running container.
 * [`docker ps`](https://docs.docker.com/engine/reference/commandline/ps) shows running containers.
-* [`docker logs`](https://docs.docker.com/engine/reference/commandline/logs) gets logs from container.  (You can use a custom log driver, but logs is only available for `json-file` and `journald` in 1.10).
-* [`docker inspect`](https://docs.docker.com/engine/reference/commandline/inspect) looks at all the info on a container (including IP address).
+* [`docker logs`](https://docs.docker.com/engine/reference/commandline/logs) gets logs from container.
+* [`docker inspect`](https://docs.docker.com/engine/reference/commandline/inspect) looks at all the info on a container.
 * [`docker events`](https://docs.docker.com/engine/reference/commandline/events) gets events from container.
 * [`docker port`](https://docs.docker.com/engine/reference/commandline/port) shows public facing port of container.
 * [`docker top`](https://docs.docker.com/engine/reference/commandline/top) shows running processes in container.
