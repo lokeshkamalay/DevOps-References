@@ -1,5 +1,5 @@
 pipeline{
-    agent { None }
+    agent none
     environment { 
         WHEREAMI = "in Global Environment"
     }
