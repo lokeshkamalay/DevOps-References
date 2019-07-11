@@ -11,6 +11,13 @@ arithmetic() {
 	echo ${result[@]}
 }
 
+#Variable doesn't hold an array
+variable=$(arithmetic 10 20)
+echo "$variable"
+echo "${variable[0]}"
+echo "${variable[1]}"
+
+#Need to declare an array first
 declare -a res=($(arithmetic 10 20))
 echo "Addition: ${res[0]}"
 echo "Substraction: ${res[1]}"
