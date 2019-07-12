@@ -1,0 +1,20 @@
+#!/bin/sh
+clear
+for((i=1;i<=12;i=i+1));do
+if [[ -e abc.txt ]];then
+        echo "The File has arrived! Processing Started!"
+        exit
+else    
+        if [[ $i -eq 6 ]];then
+                echo "Emailing vendor"
+        fi
+        if [[ $i -eq 9 ]]; then
+                echo "Emailing Support"
+        fi
+        if [[ $i -eq 12 ]]; then
+                echo "Emailing Support, Vendor and Managers"
+        fi
+        echo "$i minute The File hasn't arrived yet!"
+        sleep 1
+fi      
+done
