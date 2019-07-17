@@ -1,4 +1,4 @@
-# This repo is just created for the benefit of DevOps aspirants.
+# This repo is just created for the benefit of DevOps aspirants
 ## It contains few references related to DevOps discussions
 
 ### Slides
