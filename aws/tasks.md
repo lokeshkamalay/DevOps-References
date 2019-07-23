@@ -1,5 +1,6 @@
 1. Create a launch configuration template and spin up a machine by using the template.
 2. Create a VPC with 4 subnets (2 in public, 2 in private), Create and update the Routes, Create IGW and assign it to Public Subnets, Create a NAT GW and assign it to Private Subnets.  Install GIT in a machine that is in Private subnet.
+Taking help from - https://www.site24x7.com/tools/ipv4-subnetcalculator.html
 3. Implement connectivity between two VPCs.
 4. Create an Image from a running machine.  
 5. Backup the machine and create a snapshot retention policy.
