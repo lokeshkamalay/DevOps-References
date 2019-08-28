@@ -1,0 +1,20 @@
+---
+- name: Testing with EC2
+  hosts: localhost
+  tasks:
+    - name: Spin up an EC2 machine
+      ec2:
+        aws_access_key: AKIA2HTJSUQHY5FN
+        aws_secret_key: eqL6RM5cf42obNGb/BbXuM+qsTOyAwr
+        key_name: 'MAC'
+        instance_type: t2.micro
+        image: ami-0b898040803850657
+        wait: yes
+        count: 1
+        vpc_subnet_id: subnet-6c114742
+        assign_public_ip: yes
+        region: us-east-1
+      register: ec2_status
+
+    - debug:
+        var: ec2_status
