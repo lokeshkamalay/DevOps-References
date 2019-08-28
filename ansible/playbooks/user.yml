@@ -16,6 +16,7 @@
   tasks:
     - name: Generating Hashpassword for {{userid}}
       command: python -c 'import crypt; print crypt.crypt("{{ userid }}","Loki")' #Generating the password as the same user id.  This works only if the userid is in number
+      delegate_to: localhost
       register: password
       when: task is match("create")
    
@@ -34,8 +35,7 @@
 
     - name: Grant Sudo Privileges
       shell: echo "{{ userid }}        ALL=(ALL)       NOPASSWD{{ ':' }} ALL" > /etc/sudoers.d/{{ username }}
-      tags:
-       - withsudo
+      when: task is match("create")
 
     - name: Deleting user {{userid}}
       user:
