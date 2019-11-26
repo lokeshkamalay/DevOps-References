@@ -1,0 +1,6 @@
+---
+- name: Start the Service
+  service:
+    name: nginx
+    state: restarted
+  listen: post-tasks

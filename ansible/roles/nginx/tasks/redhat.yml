@@ -1,0 +1,7 @@
+- name: Installing nginx
+  yum:
+    name: nginx
+    state: "{{ state }}"
+  notify: post-tasks
+- name: importing index.html task file
+  import_tasks: template.yml
