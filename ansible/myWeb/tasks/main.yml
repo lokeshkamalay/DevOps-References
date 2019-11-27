@@ -1,0 +1,52 @@
+---
+- name: Spinning up nginx
+  ec2:
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        aws_region: "{{ REGION }}"
+        key_name: "{{ MYKEY }}"
+        instance_type: t2.micro
+        user_data: |
+                   #!/bin/sh
+                   sudo apt-get install python, nginx -y
+        image: ami-04b9e92b5572fa0d1
+        wait: yes
+        count: 1
+        instance_tags:
+          Name: nginx-loadbalancer
+        vpc_subnet_id: subnet-6c114742
+        assign_public_ip: yes
+      register: output
+- name: Configure host file
+  lineinfile:
+      path: hosts
+      regexp: "^[nginx]"
+      insertafter: "[nginx]"
+      line: "{{ item.private_ip }}"
+  loop: "{{ output.instances }}"
+
+- name: Spinning up my App
+  ec2:
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        aws_region: "{{ REGION }}"
+        key_name: "{{ MYKEY }}"
+        instance_type: t2.micro
+        user_data: |
+                   #!/bin/sh
+                   sudo apt-get install httpd -y
+        image: ami-0c322300a1dd5dc79
+        wait: yes
+        count: 1
+        instance_tags:
+          Name: webApp
+        vpc_subnet_id: subnet-6c114742
+        assign_public_ip: no
+      register: output
+- name: Configure host file
+  lineinfile:
+      path: hosts
+      regexp: "^[webservers]"
+      insertafter: "[webservers]"
+      line: "{{ item.private_ip }}"
+  loop: "{{ output.instances }}"
