@@ -4,16 +4,15 @@
   become: true
   user: ubuntu
   tasks:
+    - name: Installing nginx
+      apt:
+        name: nginx
+        state: present
+
     - name: Creating the configuration file for our website mysite
       template:
         src: files/nginx.conf.j2 
-        dest: /etc/nginx/conf.d/mysite.conf
-    
-    - name: Disabling the Default site
-      replace:
         dest: /etc/nginx/nginx.conf
-        regexp: "include /etc/nginx/sites-enabled/"
-        replace: "#include /etc/nginx/sites-enabled/"
- 
+    
     - name: Restarting the nginx service
       service: name=nginx state=restarted

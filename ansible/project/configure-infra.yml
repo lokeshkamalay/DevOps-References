@@ -1,6 +1,4 @@
 ---
-- import_playbook: configure-boto.yml
-
 - name: Launching an EC2 machine
   hosts: localhost
   become: true
@@ -20,12 +18,12 @@
         user_data: |
                    #!/bin/sh
                    sudo apt-get install python -y
-        image: ami-009307dd5dee4e17b
+        image: ami-04b9e92b5572fa0d1
         wait: yes
         count: 1
         instance_tags:
           Name: nginx-loadbalancer
-        vpc_subnet_id: subnet-3a885f66
+        vpc_subnet_id: subnet-6c114742
         assign_public_ip: yes
       register: output
     
@@ -44,12 +42,12 @@
         aws_region: "{{ REGION }}"
         key_name: "{{ MYKEY }}"
         instance_type: t2.micro
-        image: ami-6871a115
+        image: ami-0c322300a1dd5dc79
         wait: yes
-        count: 2
+        count: 1
         instance_tags:
           Name: mysite-webserver
-        vpc_subnet_id: subnet-3a885f66
+        vpc_subnet_id: subnet-6c114742
         assign_public_ip: yes
       register: output
 
