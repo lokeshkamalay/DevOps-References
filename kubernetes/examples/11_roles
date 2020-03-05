@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+    name: uta
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+    name: uta
+---
+#kubectl create sa uta
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: uta
+  name: uta-pod-reader
+rules:
+- apiGroups: [""] # "" indicates the core API group
+  resources: ["pods"]
+  verbs: ["get", "watch", "list"]
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+    name: uta-pod-reader-rb
+    namespace: uta
+subjects:
+-   kind: ServiceAccount
+    name: uta # Name is case sensitive
+    namespace: uta
+roleRef:
+    kind: Role #this must be Role or ClusterRole
+    name: uta-pod-reader # this must match the name of the Role or ClusterRole you wish to bind to
+    apiGroup: rbac.authorization.k8s.io
+#kubectl get secrets uta-token-xgb7q -o jsonpath='{.data.token}' | base64 --decode
+#kubectl config set-credentials uta --token={token}
+#kubectl config set-context --user=uta
+#kubectl config set-context --current --user=uta
