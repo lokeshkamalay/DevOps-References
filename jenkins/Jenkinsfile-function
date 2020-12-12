@@ -1,0 +1,38 @@
+pipeline {
+    agent {
+        label 'agent1'
+    }
+    environment {
+        myVar = "Test"
+    }
+    stages {
+        stage('Initialization') {
+            steps {
+                script {
+                    terraform("init")
+                }
+            }
+        }
+        stage ('Planning') {
+            steps {
+                script {
+                    terraform("plan")
+                }
+            }
+        }
+        stage ('Apply') {
+            steps {
+                script {
+                    terraform("apply")
+                }
+            }
+        }
+    }
+}
+
+def terraform(task) {
+    if (task == "apply") {
+        task = task + " --auto-approve"
+    }
+    echo "10 lines of terraform $task"
+}
