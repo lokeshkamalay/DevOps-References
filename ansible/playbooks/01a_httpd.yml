@@ -1,32 +1,21 @@
-- name: Configuring Jenkins agent
-  hosts: jenkins-agents
+- name: This playbook installs httpd software
+  hosts: all
   become: true
   tasks:
-    - name: Installing openjdk
+    - name: Installing httpd software
       yum:
-        name: java-1.8.0-openjdk
+        name: httpd
         state: present
-    
-    - name: Creating apps directory
-      file:
-        path: /opt/apps
-        state: directory
-        mode: '0755'
-
-    - name: Downloading Maven 3.6.3
-      get_url:
-        url: https://apache.osuosl.org/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
-        dest: /opt/apps/maven363.tgz
-
-    - name: Extracting the package
-      unarchive:
-        src: /opt/apps/maven363.tgz
-        dest: /opt/apps/
-        mode: '0755'
-        remote_src: yes
-
+    - name: Installing VIM software
+      yum:
+        name: vim
+        state: latest
     - name: Copying the index.html file
       copy:
         src: index.html
         dest: /var/www/html/index.html
         mode: 0755
+    - name: Starting the httpd service
+      service:
+        name: httpd
+        state: started
