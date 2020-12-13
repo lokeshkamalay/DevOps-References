@@ -25,8 +25,3 @@
         mode: '0755'
         remote_src: yes
 
-    - name: Copying the index.html file
-      copy:
-        src: index.html
-        dest: /var/www/html/index.html
-        mode: 0755
