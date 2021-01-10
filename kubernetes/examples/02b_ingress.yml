@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mydemopod
+  namespace: suv
+  labels:
+    app: nginx
+    project: myProjectDemo
+spec:
+  containers:
+  - name: nginx
+    image: "lokeshkamalay/maven:tomcat-13"
+    resources:
+      limits:
+        memory: "200Mi"
+      requests:
+        memory: "100Mi"
+    ports:
+      - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: mydemosvc
+  namespace: suv
+spec: 
+  selector: 
+    app: nginx
+  ports: 
+  - name: http
+    port: 8080
+    protocol: TCP
+
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: mysuvingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+    - host: mysuvdemo.192.168.99.100.xip.io
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: mydemosvc
+              servicePort: 8080
