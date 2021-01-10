@@ -26,6 +26,7 @@ spec:
     protocol: TCP
 
 ---
+# In  my Minikube, v1 version was not supporting hence used v1beta1
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
