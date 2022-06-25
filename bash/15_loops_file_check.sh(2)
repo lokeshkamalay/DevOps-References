@@ -1,0 +1,47 @@
+#!/bin/bash
+clear
+
+function support() {
+	echo "Informing Support"
+}
+
+function vendor() {
+	echo "Informing Vendor"
+}
+
+function business() {
+	echo "Informing Business About the delay"
+}
+
+function escalate() {
+	echo "Escalating to Bloomberg"
+}
+
+i=1
+while [[ $i -le 121 ]]; do
+	if [[ -e bloomberg.txt ]];then
+		echo "Processing it"
+		exit 0
+	else
+		echo "$i minute - files doesn't arrive yet"
+		if [[ $i -eq 30 ]]; then
+			support
+		elif [[ $i -eq 60 ]]; then
+			support
+			vendor
+		elif [[ $i -eq 90 ]]; then
+			support
+			vendor
+			business
+		elif [[ $i -eq 120 ]]; then
+			support
+			vendor
+			business
+			escalate
+		elif [[ $i -eq 121 ]];then
+			echo "The file didn't arrive so Exiting the script"
+		fi
+	fi
+	let i+=1
+	sleep 1
+done
