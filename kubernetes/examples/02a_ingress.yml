@@ -27,18 +27,20 @@ spec:
 
 ---
 # In  my Minikube, v1 version was not supporting hence used v1beta1
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: mysiteingress
-  annotations:
-    kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
-    - host: mysite.192.168.99.100.xip.io
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: mysitesvc
-              servicePort: 80
+  - host: myingress.192.168.59.100.nip.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: mysitesvc
+            port:
+              number: 80
+  ingressClassName: nginx
