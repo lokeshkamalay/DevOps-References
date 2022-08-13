@@ -1,0 +1,6 @@
+cidr_block = "10.0.0.0/26"
+prefix = "prod-demo"
+public_subnet = "10.0.0.0/28"
+private_subnet = "10.0.0.16/28"
+ami = "ami-090fa75af13c156b4"
+instance_type = "t2.micro"
