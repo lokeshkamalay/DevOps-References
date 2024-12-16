@@ -1,0 +1,57 @@
+# pipeline {
+#   agent {
+#   }
+#   environment {
+#   }
+#   stages {
+#     stage('checkout') {
+#       steps {
+#       }
+#     }
+#   }
+# }
+
+name: This is my test job
+on: #Trigger
+  push: #Trigger when there is a commit
+  workflow_dispatch: #Manully run
+jobs:
+  ci: # Name of your job
+    id: myjob1 #Id of your job
+    runs-on: ubuntu-latest #windows-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      
+      - name: Perform the build
+        run: | # kind of shell block
+          echo "Hello World"
+          mvn --version
+      
+      - name: Performing Sonar Analysis
+        run: |
+          echo "sonarscan bla bla"
+
+      - name: Publishing package
+        run: |
+          echo "jfrog publish"
+      
+      - name: copy file via ssh password
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          source: "tests/a.txt,tests/b.txt"
+          target: your_server_target_folder_path
+
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: whoami      
+
