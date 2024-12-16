@@ -17,7 +17,7 @@ on: #Trigger
   workflow_dispatch: #Manully run
 jobs:
   ci: # Name of your job
-    id: myjob1 #Id of your job
+  id: myjob1 #Id of your job
     runs-on: ubuntu-latest #windows-latest
     steps:
       - name: checkout
